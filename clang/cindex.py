@@ -4116,7 +4116,7 @@ class Config(object):
             raise Exception("library file must be set before before using " \
                             "any other functionalities in libclang.")
 
-        Config.library_file = fspath("/usr/lib/llvm-10/lib/libclang.so")
+        Config.library_file = fspath(filename)
 
     @staticmethod
     def set_compatibility_check(check_status):
@@ -4170,7 +4170,7 @@ class Config(object):
 
     def get_cindex_library(self):
         try:
-            library = cdll.LoadLibrary("/usr/lib/llvm-10/lib/libclang.so")#self.get_filename())
+            library = cdll.LoadLibrary(self.get_filename())
         except OSError as e:
             msg = str(e) + ". To provide a path to libclang use " \
                            "Config.set_library_path() or " \
