@@ -128,9 +128,8 @@ class mock_method:
             method_spec_string = f", ({method_spec_string})"
 
         mock.append(
-            "MOCK_METHOD%(template)s((%(result_type)s), %(name)s, (%(args)s)%(specs)s);" % {
+            "MOCK_METHOD((%(result_type)s), %(name)s, (%(args)s)%(specs)s);" % {
             'specs' : method_spec_string,
-            'template' : self.is_template and '_T' or '',
             'name' : name,
             'result_type' : self.result_type,
             'args' : self.args
