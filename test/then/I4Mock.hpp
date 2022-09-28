@@ -12,9 +12,9 @@ namespace n1 {
 class I4Mock : public I4
 {
 public:
-    MOCK_METHOD1(f0, void(bool));
-    MOCK_METHOD0(f1, void());
-    MOCK_CONST_METHOD0(f2, Enum());
+    MOCK_METHOD((void), f0, (bool), (override));
+    MOCK_METHOD((void), f1, (), (override));
+    MOCK_METHOD((Enum), f2, (), (const, override));
 };
 
 } // namespace n1

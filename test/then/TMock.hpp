@@ -13,8 +13,8 @@ template<typename Elem>
 class TMock : public T<Elem>
 {
 public:
-    MOCK_CONST_METHOD0_T(GetSize, int());
-    MOCK_METHOD1_T(Push, void(const Elem &));
+    MOCK_METHOD((int), GetSize, (), (const, override));
+    MOCK_METHOD((void), Push, (const Elem &), (override));
 };
 
 } // namespace n

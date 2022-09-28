@@ -12,7 +12,7 @@ namespace n1 {
 class I3Mock : public I3
 {
 public:
-    MOCK_METHOD0(f1, void());
+    MOCK_METHOD((void), f1, (), (override));
 };
 
 } // namespace n1

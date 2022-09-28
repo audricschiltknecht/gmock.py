@@ -12,32 +12,32 @@ namespace n1 {
 class I2Mock : public I2
 {
 public:
-    MOCK_CONST_METHOD0(f0, void());
-    MOCK_METHOD1(f1, void(int));
-    MOCK_METHOD1(f2, void(double));
-    MOCK_METHOD2(f3, void(int, double));
-    MOCK_METHOD3(f4, void(int, double, const std::string &));
-    MOCK_METHOD1(f5, int(const std::string &));
-    MOCK_CONST_METHOD1(f6, boost::shared_ptr<int>(const boost::shared_ptr<int> &));
-    MOCK_CONST_METHOD0(f7, const int&());
-    MOCK_METHOD0(f8, boost::function<void(int)>());
-    MOCK_CONST_METHOD2(f9, boost::non_type<int,0>(const boost::non_type<int, 1> &, const boost::non_type<int, 2> &));
-    MOCK_METHOD0(f10, const int*const ());
-    MOCK_METHOD0(f11, const void());
-    MOCK_METHOD0(f12, const void());
-    MOCK_METHOD0(f13, const void());
-    MOCK_METHOD0(f14, const void());
-    MOCK_METHOD0(f15,  const void());
-    MOCK_METHOD0(f16, const  void());
-    MOCK_METHOD0(f17, const  void());
+    MOCK_METHOD((void), f0, (), (const, override));
+    MOCK_METHOD((void), f1, (int), (override));
+    MOCK_METHOD((void), f2, (double), (override));
+    MOCK_METHOD((void), f3, (int, double), (override));
+    MOCK_METHOD((void), f4, (int, double, const std::string &), (override));
+    MOCK_METHOD((int), f5, (const std::string &), (override));
+    MOCK_METHOD((boost::shared_ptr<int>), f6, (const boost::shared_ptr<int> &), (const, override));
+    MOCK_METHOD((const int&), f7, (), (const, override));
+    MOCK_METHOD((boost::function<void(int)>), f8, (), (override));
+    MOCK_METHOD((boost::non_type<int,0>), f9, (const boost::non_type<int, 1> &, const boost::non_type<int, 2> &), (const, override));
+    MOCK_METHOD((const int*const ), f10, (), (override));
+    MOCK_METHOD((const void), f11, (), (override));
+    MOCK_METHOD((const void), f12, (), (override));
+    MOCK_METHOD((const void), f13, (), (override));
+    MOCK_METHOD((const void), f14, (), (override));
+    MOCK_METHOD(( const void), f15, (), (override));
+    MOCK_METHOD((const  void), f16, (), (override));
+    MOCK_METHOD((const  void), f17, (), (override));
     virtual int operator()() { return function_call_or_cast_operator(); }
-    MOCK_METHOD0(function_call_or_cast_operator, int());
+    MOCK_METHOD((int), function_call_or_cast_operator, (), (override));
     virtual void operator()(int arg0, double arg1, boost::function<void (int, double)> arg2, const boost::non_type<int, 1> & arg3, const std::string & arg4) {  function_call_or_cast_operator(arg0, arg1, arg2, arg3, arg4); }
-    MOCK_METHOD5(function_call_or_cast_operator, void(int, double, boost::function<void (int, double)>, const boost::non_type<int, 1> &, const std::string &));
+    MOCK_METHOD((void), function_call_or_cast_operator, (int, double, boost::function<void (int, double)>, const boost::non_type<int, 1> &, const std::string &), (override));
     virtual double operator[](int arg0) { return array_subscript_operator(arg0); }
-    MOCK_METHOD1(array_subscript_operator, double(int));
+    MOCK_METHOD((double), array_subscript_operator, (int), (override));
     virtual void* operator->() const { return member_selection_operator(); }
-    MOCK_CONST_METHOD0(member_selection_operator, void*());
+    MOCK_METHOD((void*), member_selection_operator, (), (const, override));
 };
 
 } // namespace n1

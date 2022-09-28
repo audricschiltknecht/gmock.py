@@ -49,7 +49,7 @@ class TestGMock(unittest.TestCase):
         self.assertEqual(0, gmock.main(['../gmock.py', '-d', self.generated_dir, '-e', 'n1', 'given/I2.hpp']))
         self.assertEqual(1, len([name for name in os.listdir(self.generated_dir)]))
         self.assertTrue('I2Mock.hpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
     def test_gmock_many_files(self):
         self.assertEqual(0, gmock.main(['../gmock.py', '-d', self.generated_dir, '-e', 'n1', 'given/I1.hpp', 'given/I2.hpp', 'given/I3I4.hpp', 'given/C1.hpp']))
@@ -57,7 +57,7 @@ class TestGMock(unittest.TestCase):
         self.assertTrue('I2Mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I3Mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I4Mock.hpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
     def test_gmock_clang_args(self):
         self.assertEqual(0, gmock.main(['../gmock.py', '-d', self.generated_dir, '-e', 'n1', 'given/I3I4.hpp', '--', '-D CLASS_I5']))
@@ -65,27 +65,27 @@ class TestGMock(unittest.TestCase):
         self.assertTrue('I3Mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I4Mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I5Mock.hpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
     def test_gmock_custom_conf(self):
         self.assertEqual(0, gmock.main(['../gmock.py', '-c', 'test.conf', '-d', self.generated_dir, '-e', 'n1', 'given/I2.hpp']))
         self.assertEqual(2, len([name for name in os.listdir(self.generated_dir)]))
         self.assertTrue('I2_mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I2_mock.cpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
     def test_gmock_long_args(self):
         self.assertEqual(0, gmock.main(['../gmock.py', '--config=test.conf', '--dir='+self.generated_dir, '--expr=n1', 'given/I2.hpp']))
         self.assertEqual(2, len([name for name in os.listdir(self.generated_dir)]))
         self.assertTrue('I2_mock.hpp' in os.listdir(self.generated_dir))
         self.assertTrue('I2_mock.cpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
     def test_gmock_class_templates(self):
         self.assertEqual(0, gmock.main(['../gmock.py', '-d', self.generated_dir, 'given/T.hpp']))
         self.assertEqual(1, len([name for name in os.listdir(self.generated_dir)]))
         self.assertTrue('TMock.hpp' in os.listdir(self.generated_dir))
-        self.assertMocks();
+        self.assertMocks()
 
 if __name__ == '__main__':
     unittest.main()
