@@ -64,10 +64,11 @@ class mock_method:
         'operator~'   : 'complement_operator'
     }
 
-    def __init__(self, result_type, name, is_const, is_template, args_size, args, args_prefix = 'arg'):
+    def __init__(self, result_type, name, is_const, is_virtual, is_template, args_size, args, args_prefix = 'arg'):
         self.result_type = result_type
         self.name = name
         self.is_const = is_const
+        self.is_virtual = is_virtual
         self.is_template = is_template
         self.args_size = args_size
         self.args = args
@@ -116,10 +117,19 @@ class mock_method:
             name = self.operators[self.name]
 
         mock.append(gap)
+
+        method_specs = []
+        if self.is_const:
+            method_specs.append("const")
+        if self.is_virtual:
+            method_specs.append("override")
+        method_spec_string = ", ".join(method_specs)
+        if method_spec_string:
+            method_spec_string = f", ({method_spec_string})"
+
         mock.append(
-            "MOCK_%(const)sMETHOD%(nr)s%(template)s(%(name)s, %(result_type)s(%(args)s));" % {
-            'const' : self.is_const and 'CONST_' or '',
-            'nr' : self.args_size,
+            "MOCK_METHOD%(template)s((%(result_type)s), %(name)s, (%(args)s)%(specs)s);" % {
+            'specs' : method_spec_string,
             'template' : self.is_template and '_T' or '',
             'name' : name,
             'result_type' : self.result_type,
@@ -219,6 +229,7 @@ class mock_generator:
                          self.__get_result_type(tokens, spelling),
                          spelling,
                          node.is_const_method(),
+                         node.is_virtual_method(),
                          self.__is_template_class(expr),
                          len(list(node.get_arguments())),
                          name[len(node.spelling) + 1 : -1]
